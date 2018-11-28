@@ -1,6 +1,9 @@
+### VS Code ###
+.vscode
+*.code-workspace
+
 ### JetBrains IDEs ###
 .idea/
 
 ### macOS ###
 .DS_Store
-
