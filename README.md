@@ -31,6 +31,7 @@ To check your Python files:
 ```
 cd <folder containing repository>/Workspace/src
 find . -name '*.py' -exec pycodestyle {} \;
+```
 
 ## Contributing
 
