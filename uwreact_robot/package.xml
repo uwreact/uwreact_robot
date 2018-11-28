@@ -14,6 +14,8 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
+  <exec_depend>frc_control</exec_depend>
+
   <export>
     <metapackage/>
   </export>
