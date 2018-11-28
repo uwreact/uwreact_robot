@@ -6,15 +6,21 @@ The software behind our fully autonomous FIRST robots
 
 ## Setup and Installation
 
-Typically, we will simply clone this repo into a catkin workspace and use `rosdep` to install dependencies.
-However, since `frc_control` isn't indexed by ROS yet, `rosdep` cannot find it.
-This means that you will have to clone [frc_control](https://github.com/uwreact/frc_control) manually.
-However, we have created a temporary `.rosinstall` file to help with this until `frc_control` is indexed.
+First, clone this repo into your catkin workspace. We then use `rosinstall` and `rosdep` to install non-indexed and indexed packages respectively.
 
-To install `frc_control`:
 ```
-sudo apt install python-rosinstall
-rosinstall <workspace>/src <workspace>/src/uwreact_robot/uwreact_robot.rosinstall
+# Ensure rosinstall and rosdep are installed and up to date
+sudo apt install python-rosinstall python-rosdep
+sudo rosdep init
+rosdep update
+
+# Clone the repo
+cd <workspace>/src
+git clone https://github.com/uwreact/uwreact_robot.git
+
+# Install all dependencies
+rosinstall --catkin . uwreact_robot/uwreact_robot.rosinstall
+rosdep install --from-paths . --ignore-src -r -y
 ```
 
 ## Coding Standards

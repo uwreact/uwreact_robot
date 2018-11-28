@@ -1,2 +1,1 @@
-# This rosinstall file is temporary, until frc_control is indexed.
 - git: {local-name: frc_control, uri: 'https://github.com/uwreact/frc_control.git', version: kinetic-devel}
