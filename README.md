@@ -1,5 +1,7 @@
 # uwreact_robot
 
+[![Build Status](https://travis-ci.com/uwreact/uwreact_robot.svg?branch=master)](https://travis-ci.com/uwreact/uwreact_robot)
+
 The software behind our fully autonomous FIRST robots
 
 ## Setup and Installation
