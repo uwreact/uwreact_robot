@@ -11,6 +11,11 @@ notifications:
     on_failure: change #[always|never|change] # default: always
 
 env:
+  # This rosinstall file is temporary, until frc_control is indexed
+  global:
+    - UPSTREAM_WORKSPACE=file
+    - ROSINSTALL_FILENAME=uwreact_robot.rosinstall
+
   matrix:
     - ROS_DISTRO="kinetic"   ROS_REPO="ros"
     - ROS_DISTRO="kinetic"   ROS_REPO="ros-shadow-fixed"
