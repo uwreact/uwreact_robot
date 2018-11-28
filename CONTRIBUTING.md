@@ -21,7 +21,7 @@ Depending on your situation, there are two main ways to collaborate:
 
 ### Opening Issues
 
-The [issue tracker](https://github.com/uwreact/shire/issues) is our preferred method for reporting bugs and suggesting features. We ask that you:
+The [issue tracker](https://github.com/uwreact/uwreact_robot/issues) is our preferred method for reporting bugs and suggesting features. We ask that you:
 
 - **DO** check if a similar issue has already been reported.
 - **DO** follow the issue templates for the type of issue you are opening.
@@ -41,13 +41,13 @@ The easiest way to get started once you've selected an issue is:
 2. Clone your fork:
 
 ```bash
-git clone https://github.com/<your-username>/shire.git
+git clone https://github.com/<your-username>/uwreact_robot.git
 ```
 
 3. Configure your remotes:
 
 ```bash
-git remote add upstream https://github.com/uwreact/shire.git
+git remote add upstream https://github.com/uwreact/uwreact_robot.git
 ```
 
 4. Get the latest changes:
@@ -75,52 +75,4 @@ git pull upstream master
 
 ### Good First Issues
 
-If you're not sure where to start, we maintain a list of [good first issues](https://github.com/uwreact/shire/labels/good%20first%20issue) with a limited scope for each of our projects.
-
-## Getting Started with this project
-
-These instructions will set up your local machine for developing, testing, and deploying this project.
-
-### Prerequisites
-
-Install [Yarn](https://yarnpkg.com/en/) on your machine.
-
-Create a project on [Firebase](https://firebase.google.com/) and copy the configuration variables into `merry/.env.development`.
-
-Create an application on the [Microsoft Application Registration Portal](https://apps.dev.microsoft.com/portal/register-app) and copy the ID into `pippin/.env.developmnent`.
-
-### Installation
-
-Install dependencies using yarn:
-
-```bash
-yarn
-```
-
-### Development
-
-Start the application with webpack development server:
-
-```bash
-cd merry
-yarn start
-```
-
-### Testing
-
-Test the application with jest:
-
-```bash
-cd [merry/pippin]
-yarn test
-```
-
-### Deployment
-
-Modify `[merry/pippin]/package.json` to include your Firebase project,
-then deploy the application to your Firebase project:
-
-```bash
-cd [merry/pippin]
-yarn deploy
-```
+If you're not sure where to start, we maintain a list of [good first issues](https://github.com/uwreact/uwreact_robot/labels/good%20first%20issue) with a limited scope for each of our projects.

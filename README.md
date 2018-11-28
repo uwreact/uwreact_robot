@@ -1,6 +1,6 @@
-# robot
+# uwreact_robot
 
-The `robot` project contains the software behind our fully autonomous FIRST robots
+The software behind our fully autonomous FIRST robots
 
 ## Coding Standards
 For **C++** code, we mostly follow the ROS coding guidelines, with a few exceptions.
@@ -32,8 +32,8 @@ We facilitate a completely open source environment for all of our projects, and 
 
 ### Contributing Guide
 
-Before opening your editor, read this project's [contributing guide](https://github.com/uwreact/robot/blob/master/CONTRIBUTING.md) to learn about its development and contribution process.
+Before opening your editor, read this project's [contributing guide](https://github.com/uwreact/uwreact_robot/blob/master/CONTRIBUTING.md) to learn about its development and contribution process.
 
 ### License
 
-The `robot` project is [BSD 3-Clause licensed](https://github.com/uwreact/robot/blob/master/LICENSE).
+The `robot` project is [BSD 3-Clause licensed](https://github.com/uwreact/uwreact_robot/blob/master/LICENSE).
