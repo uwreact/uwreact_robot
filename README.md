@@ -54,8 +54,8 @@ We facilitate a completely open source environment for all of our projects, and 
 
 ### Contributing Guide
 
-Before opening your editor, read this project's [contributing guide](https://github.com/uwreact/uwreact_robot/blob/master/CONTRIBUTING.md) to learn about its development and contribution process.
+Before opening your editor, read this project's [contributing guide](CONTRIBUTING.md) to learn about its development and contribution process.
 
 ### License
 
-The `robot` project is [BSD 3-Clause licensed](https://github.com/uwreact/uwreact_robot/blob/master/LICENSE).
+The `robot` project is [BSD 3-Clause licensed](LICENSE).
