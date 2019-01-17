@@ -12,7 +12,7 @@ While we look over every pull request, we maintain a focus on this project's cur
 
 <!-- Put an 'x' in the boxes that apply. -->
 
-- [ ] I have read the [contributing](../CONTRIBUTING.md) guide.
+- [ ] I have read the [contributing](https://github.com/uwreact/uwreact_robot/blob/master/CONTRIBUTING.md) guide.
 - [ ] I have referenced relevant issues.
 - [ ] I have labeled accordingly.
 - [ ] I have detailed my changes as much as possible.
