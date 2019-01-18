@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>uwreact_description</name>
+  <version>0.0.0</version>
+  <description>3D models and configuration of the UW REACT robots and environments</description>
+
+  <maintainer email="dev@uwreact.ca">UW REACT Software Team</maintainer>
+
+  <license>BSD-3</license>
+
+  <url type="website">https://uwreact.ca</url>
+  <url type="bugtracker">https://github.com/uwreact/uwreact_robot/issues</url>
+  <url type="repository">https://github.com/uwreact/uwreact_robot</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <exec_depend>xacro</exec_depend>
+  <exec_depend>urdf</exec_depend>
+
+</package>

@@ -58,4 +58,4 @@ Before opening your editor, read this project's [contributing guide](CONTRIBUTIN
 
 ### License
 
-The `robot` project is [BSD 3-Clause licensed](LICENSE).
+The `uwreact_robot` project is [BSD 3-Clause licensed](LICENSE).
