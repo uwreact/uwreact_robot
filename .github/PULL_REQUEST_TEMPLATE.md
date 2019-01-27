@@ -16,11 +16,11 @@ While we look over every pull request, we maintain a focus on this project's cur
 - [ ] I have referenced relevant issues.
 - [ ] I have labeled accordingly.
 - [ ] I have detailed my changes as much as possible.
-- [ ] I have tested my changes on our frc robot's hardware. 
 
 ## Change Checklist
 
 <!-- Put an 'x' in the boxes that apply. -->
 
+- [ ] I have tested my changes on our frc robot's hardware. 
 - [ ] I have added tests.
 - [ ] I have added necessary documentation.
