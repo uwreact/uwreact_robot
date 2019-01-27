@@ -1,6 +1,7 @@
 ---
 name: 🐛 Bug Report
 about: Report a bug in this project's source.
+labels: "🐛 bug"
 ---
 
 <!--

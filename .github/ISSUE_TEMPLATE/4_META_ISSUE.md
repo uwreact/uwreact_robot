@@ -1,6 +1,7 @@
 ---
 name: 📚 Meta Issue
 about: Keep track of multiple issues with this project.
+labels: "📚 meta issue"
 ---
 
 <!--
