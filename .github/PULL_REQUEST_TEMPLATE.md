@@ -21,6 +21,6 @@ While we look over every pull request, we maintain a focus on this project's cur
 
 <!-- Put an 'x' in the boxes that apply. -->
 
-- [ ] I have tested my changes on our frc robot's hardware. 
+- [ ] I have tested my changes on our real hardware. 
 - [ ] I have added tests.
 - [ ] I have added necessary documentation.
