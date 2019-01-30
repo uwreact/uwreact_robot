@@ -1,1 +1,1 @@
-- git: {local-name: frc_control, uri: 'https://github.com/uwreact/frc_control.git', version: kinetic-devel}
+- git: {local-name: frc_control, uri: 'https://github.com/uwreact/frc_control.git', version: melodic-devel}
