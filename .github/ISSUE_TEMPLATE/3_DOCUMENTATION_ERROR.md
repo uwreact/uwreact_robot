@@ -1,6 +1,7 @@
 ---
 name: 📖 Documentation Error
 about: Report an error in this project's documentation.
+labels: "📖 documentation"
 ---
 
 <!--
