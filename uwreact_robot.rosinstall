@@ -1,1 +1,2 @@
 - git: {local-name: frc_control, uri: 'https://github.com/uwreact/frc_control.git', version: melodic-devel}
+- git: {local-name: zed_ros_wrapper, uri: 'https://github.com/stereolabs/zed-ros-wrapper'}
