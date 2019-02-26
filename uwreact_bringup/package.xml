@@ -16,5 +16,6 @@
 
   <exec_depend>frc_robot_hw</exec_depend>
   <exec_depend>frc_robot_sim</exec_depend>
+  <exec_depend>zed_wrapper</exec_depend>
 
 </package>
