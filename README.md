@@ -23,6 +23,20 @@ rosinstall --catkin . uwreact_robot/uwreact_robot.rosinstall
 rosdep install --from-paths . --ignore-src -r -y
 ```
 
+In order to build anything zed related, you'll also need to install CUDA 10 and the ZED SDK
+
+### CUDA 10
+
+[Download CUDA 10](https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1804&target_type=deblocal) and follow install instructions according to which installation method you prefer
+
+### ZED SDK
+
+[Download the appropriate ZED SDK](https://www.stereolabs.com/developers/release/#sdkdownloads_anchor), then to install:
+```
+chmod +x ZED_SDK_{YOUR VERSION}.run
+./ZED_SDK_{YOUR VERSION}.run
+```
+
 ## Code Style
 
 We largely follow the ROS coding guidelines, with a few noteable exceptions. To make development easy, we provide configuration files for standard linting and static analysis tools such as [clang-format](https://clang.llvm.org/docs/ClangFormat.html), [clang-tidy](https://clang.llvm.org/extra/clang-tidy) and [yapf](https://github.com/google/yapf).
