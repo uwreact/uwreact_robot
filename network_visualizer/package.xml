@@ -13,9 +13,10 @@
   <url type="bugtracker">http://github.com/uw_react/uwreact_robot/issues</url> 
   
   <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>pyqt5</build_depend>
-  <build_export_depend>pyqt5</build_export_depend>
-  <exec_depend>pyqt5</exec_depend>
+  <build_depend>python_qt_binding</build_depend>
+  <build_export_depend>python_qt_binding</build_export_depend>
+  <exec_depend>python_qt_binding</exec_depend>
+
   <export>
 
   </export>
