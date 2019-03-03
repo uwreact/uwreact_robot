@@ -14,9 +14,15 @@ env:
   global:
     # Use StereoLabs' Docker image to avoid having to manually download
     # and install CUDA and the ZED SDK
-    - DOCKER_BASE_IMAGE=stereolabs/zed:ubuntu1804-cuda10.0-zed2.7
-    - UPSTREAM_WORKSPACE=file
-    - ROSINSTALL_FILENAME=uwreact_robot.rosinstall
+    - DOCKER_BASE_IMAGE="stereolabs/zed:ubuntu1804-cuda10.0-zed2.7"
+
+    # Install non-distributed dependencies
+    - UPSTREAM_WORKSPACE="file"
+    - ROSINSTALL_FILENAME="uwreact_robot.rosinstall"
+
+    # Run clang_format
+    - CLANG_FORMAT_CHECK="file"
+    - CLANG_FORMAT_VERSION="7"
   matrix:
     # TODO: Uncomment once depthimage-to-laserscan is added to the main ros
     #       repo. Should be around Feb 25. See:
