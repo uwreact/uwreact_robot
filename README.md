@@ -37,29 +37,21 @@ chmod +x ZED_SDK_{YOUR VERSION}.run
 ./ZED_SDK_{YOUR VERSION}.run
 ```
 
-## Coding Standards
+## Code Style
 
-For **C++** code, we mostly follow the ROS coding guidelines, with a few exceptions.
-There is a `.clang_format` file that can automatically format your C++ code in the correct style.
+We largely follow the ROS coding guidelines, with a few noteable exceptions. To make development easy, we provide configuration files for standard linting and static analysis tools such as [clang-format](https://clang.llvm.org/docs/ClangFormat.html), [clang-tidy](https://clang.llvm.org/extra/clang-tidy) and [yapf](https://github.com/google/yapf).
 
-To run the formatter, install the package `clang-format`
+To install the linters:
+
 ```
-sudo apt install clang-format
-```
-Once the package is installed, you can run the following command:
-```
-cd <workspace>/src
-find . -name '*.h' -or -name '*.cpp' | xargs clang-format -i -style=file $1
+$ sudo apt install clang-format-7 clang-tidy-7 yapf
 ```
 
-For **Python** code, we follow the PEP8 standard. Install `pycodestyle` to find any styling errors.
+To run the linters:
+
 ```
-sudo pip install pycodestyle
-```
-To check your Python files:
-```
-cd <workspace>/src
-find . -name '*.py' -exec pycodestyle {} \;
+$ find . -name "*.h" -o -name "*.cpp" | xargs clang-format-7 -i -style=file
+$ yapf -ir .
 ```
 
 ## Contributing
