@@ -14,10 +14,5 @@
   
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>python_qt_binding</build_depend>
-  <build_export_depend>python_qt_binding</build_export_depend>
-  <exec_depend>python_qt_binding</exec_depend>
 
-  <export>
-
-  </export>
 </package>
