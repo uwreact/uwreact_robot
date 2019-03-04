@@ -27,20 +27,13 @@
 # POSSIBILITY OF SUCH DAMAGE.
 ##############################################################################
 
-from python_qt_binding.QtWidgets import QMainWindow, QApplication
-
-import sys
-
-class MainWindow(QMainWindow):
-	def __init__(self, *args, **kwargs):
-		super(MainWindow, self).__init__(*args, **kwargs)
-
-		self.setWindowTitle("UW React Planning Visualization")
+from python_qt_binding.QtWidgets import QApplication
+from network_visualizer.window import MainWindow
 
 app = QApplication([])
 
 window = MainWindow()
-window.resize(2000,2000)
+window.resize(2000, 2000)
 window.show()
 
 app.exec_()
