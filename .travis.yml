@@ -24,10 +24,7 @@ env:
     - CLANG_FORMAT_CHECK="file"
     - CLANG_FORMAT_VERSION="7"
   matrix:
-    # TODO: Uncomment once depthimage-to-laserscan is added to the main ros
-    #       repo. Should be around Feb 25. See:
-    #       https://github.com/uwreact/uwreact_robot/pull/58#issuecomment-463528453
-    # - ROS_DISTRO="melodic"   ROS_REPO="ros"
+    - ROS_DISTRO="melodic"   ROS_REPO="ros"
     - ROS_DISTRO="melodic"   ROS_REPO="ros-shadow-fixed"
 
 install:
