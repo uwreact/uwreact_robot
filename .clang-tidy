@@ -1,0 +1,71 @@
+---
+Checks:  '-*,
+          boost-*,
+          bugprone-*,
+          cppcoreguidelines-*,
+          misc-*,
+          modernize-*,
+          performance-*,
+          readability-*,
+          -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
+          -cppcoreguidelines-pro-bounds-constant-array-index,
+          -cppcoreguidelines-pro-type-vararg,
+          -modernize-raw-string-literal,
+          -readability-braces-around-statements,
+          -readability-misleading-indentation'
+
+## Disabled to allow ROS logging:
+# cppcoreguidelines-pro-type-vararg
+# cppcoreguidelines-pro-bounds-array-to-pointer-decay
+
+## Handled by clang-format:
+# readability-misleading-indentation
+
+## Disabled:
+# cppcoreguidelines-pro-bounds-constant-array-index
+# modernize-raw-string-literal
+# readability-braces-around-statements
+
+WarningsAsErrors: ''
+HeaderFilterRegex: ''
+AnalyzeTemporaryDtors: false # TODO: Figure out what this does
+FormatStyle: none
+CheckOptions:
+  # Prefer assignment over brace initialization
+  - key:    modernize-use-default-member-init.UseAssignment
+    value:  1
+
+  # Allow integer and pointer boolean conversions
+  - key:    readability-implicit-bool-conversion.AllowIntegerConditions
+    value:  1
+  - key:    readability-implicit-bool-conversion.AllowPointerConditions
+    value:  1
+
+  # Type names
+  - key:    readability-identifier-naming.ClassCase
+    value:  CamelCase
+  - key:    readability-identifier-naming.EnumCase
+    value:  CamelCase
+  - key:    readability-identifier-naming.UnionCase
+    value:  CamelCase
+
+  # Method names
+  - key:    readability-identifier-naming.MethodCase
+    value:  camelBack
+
+  # Variable names
+  - key:    readability-identifier-naming.VariableCase
+    value:  lower_case
+  - key:    readability-identifier-naming.ClassMemberSuffix
+    value:  '_'
+
+  # Const static or global variables are UPPER_CASE
+  - key:    readability-identifier-naming.EnumConstantCase
+    value:  UPPER_CASE
+  - key:    readability-identifier-naming.StaticConstantCase
+    value:  UPPER_CASE
+  - key:    readability-identifier-naming.ClassConstantCase
+    value:  UPPER_CASE
+  - key:    readability-identifier-naming.GlobalVariableCase
+    value:  UPPER_CASE
+...
