@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 ##############################################################################
 # Copyright (C) 2019, UW REACT
 #
@@ -26,6 +24,8 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 ##############################################################################
+
+from python_qt_binding.QtWidgets import QMainWindow
 
 class MainWindow(QMainWindow):
 	def __init__(self, *args, **kwargs):
