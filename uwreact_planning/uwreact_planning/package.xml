@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>uwreact_robot</name>
+  <name>uwreact_planning</name>
   <version>0.0.0</version>
-  <description>The software behind UW REACT's fully autonomous FIRST robots</description>
+  <description>The planning software behind UW REACT's fully autonomous FIRST robots</description>
 
   <maintainer email="dev@uwreact.ca">UW REACT Software Team</maintainer>
 
@@ -14,11 +14,7 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <exec_depend>uwreact_bringup</exec_depend>
-  <exec_depend>uwreact_controls</exec_depend>
-  <exec_depend>uwreact_description</exec_depend>
-  <exec_depend>uwreact_perception</exec_depend>
-  <exec_depend>uwreact_planning</exec_depend>
+  <exec_depend>network_visualizer</exec_depend>
 
   <export>
     <metapackage/>
