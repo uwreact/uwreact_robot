@@ -15,8 +15,8 @@ BraceWrapping:
   AfterStruct:            false
   AfterUnion:             false
   AfterExternBlock:       false
-  BeforeCatch:            true
-  BeforeElse:             true
+  BeforeCatch:            false
+  BeforeElse:             false
   IndentBraces:           false
   SplitEmptyFunction:     false
   SplitEmptyRecord:       false
@@ -45,7 +45,7 @@ BinPackParameters:                              false
 BreakBeforeBinaryOperators:                     NonAssignment
 BreakBeforeTernaryOperators:                    true
 BreakConstructorInitializers:                   BeforeColon
-BreakInheritanceList:                         BeforeColon # Requires clang-format-7
+BreakInheritanceList:                           BeforeColon # Requires clang-format-7
 BreakStringLiterals:                            true
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 
@@ -86,10 +86,10 @@ SpacesInCStyleCastParentheses:        false
 SpacesInContainerLiterals:            false
 SpacesInParentheses:                  false
 SpacesInSquareBrackets:               false
-SpaceBeforeCpp11BracedList:         true # Requires clang-format-7
-SpaceBeforeCtorInitializerColon:    true # Requires clang-format-7
-SpaceBeforeInheritanceColon:        true # Requires clang-format-7
-SpaceBeforeRangeBasedForLoopColon:  true # Requires clang-format-7
+SpaceBeforeCpp11BracedList:           true # Requires clang-format-7
+SpaceBeforeCtorInitializerColon:      true # Requires clang-format-7
+SpaceBeforeInheritanceColon:          true # Requires clang-format-7
+SpaceBeforeRangeBasedForLoopColon:    true # Requires clang-format-7
 
 ## Comments
 AlignTrailingComments:        true
