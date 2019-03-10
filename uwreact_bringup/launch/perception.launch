@@ -5,5 +5,5 @@
     <arg name="depth_cam_info_topic"    default="depth/camera_info" />
     <arg name="laserscan_topic"         default="depth/laserscan"/>
 
-    <include file="$(find perception_bringup)/launch/zeds.launch"/>
+    <include file="$(find uwreact_bringup)/launch/zeds.launch"/>
 </launch>
