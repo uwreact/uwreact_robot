@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>perception_localization</name>
+  <name>perception_bringup</name>
   <version>0.0.0</version>
-  <description>Responsible for all global localization done by UWReact's robot</description>
+  <description>roslaunch scripts for starting UW REACT's perception systems</description>
 
   <maintainer email="dev@uwreact.ca">UW REACT Software Team</maintainer>
 
@@ -14,4 +14,5 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
+  <exec_depend>depthimage_to_laserscan</exec_depend>
 </package>

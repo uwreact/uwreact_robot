@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<launch>
+    <arg name="depth_topic"             default="depth/depth_registered" />
+    <arg name="depth_cam_info_topic"    default="depth/camera_info" />
+    <arg name="laserscan_topic"         default="depth/laserscan"/>
+
+    <include file="$(find perception_bringup)/launch/zeds.launch"/>
+</launch>
