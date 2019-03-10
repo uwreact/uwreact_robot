@@ -44,14 +44,15 @@ We largely follow the ROS coding guidelines, with a few noteable exceptions. To 
 To install the linters:
 
 ```
-$ sudo apt install clang-format-7 clang-tidy-7 yapf
+$ sudo apt install clang-format-7 clang-tidy-7
+$ pip install yapf pylint
 ```
 
-To run the linters:
+To run the formatters:
 
 ```
 $ find . -name "*.h" -o -name "*.cpp" | xargs clang-format-7 -i -style=file
-$ yapf -ir .
+$ python -m yapf -ir .
 ```
 
 ## Contributing
