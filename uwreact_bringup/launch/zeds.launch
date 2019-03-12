@@ -1,13 +1,15 @@
 <?xml version="1.0"?>
 
 <launch>
-    <arg name="pose_frame"           default="map" />
-    <arg name="camera_model"         default="0" /> <!-- 0=ZED, 1=ZEDM-->
-    <arg name="serial_number"        default="0" />
-    <arg name="verbose"              default="true" />
+    <arg name="zed_id1"               default="0" />
 
-    <arg name="resolution"           default="2" /> <!--0=RESOLUTION_HD2K, 1=RESOLUTION_HD1080, 2=RESOLUTION_HD720, 3=RESOLUTION_VGA -->
-    <arg name="frame_rate"           default="30" />
+    <arg name="pose_frame"            default="map" />
+    <arg name="camera_model"          default="0" /> <!-- 0=ZED, 1=ZEDM-->
+    <arg name="serial_number"         default="0" />
+    <arg name="verbose"               default="true" />
+
+    <arg name="resolution"            default="2" /> <!--0=RESOLUTION_HD2K, 1=RESOLUTION_HD1080, 2=RESOLUTION_HD720, 3=RESOLUTION_VGA -->
+    <arg name="frame_rate"            default="30" />
     <!-- RESOLUTION_HD2K   -> 2208*1242, available framerates: 15 fps.
          RESOLUTION_HD1080 -> 1920*1080, available framerates: 15, 30 fps.
          RESOLUTION_HD720  -> 1280*720,  available framerates: 15, 30, 60 fps.
@@ -17,7 +19,9 @@
     <arg name="depth_cam_info_topic"  default="depth/camera_info" />
     <arg name="laserscan_topic"       default="depth/laserscan"/>
 
-    <arg name="zed_id1"               default="0" />
+    <arg name="base_frame"            default="zed_camera_center"/>
+    <arg name="laserscan_height"      default="10"/>
+    <arg name="range_min"             default="0.45"/>	
 
     <!-- First ZED camera -->
     <group ns="zed1">
@@ -33,12 +37,17 @@
 
             <arg name="depth_topic"           default="$(arg depth_topic)" />
             <arg name="depth_cam_info_topic"  default="$(arg depth_cam_info_topic)" />
+            <arg name="base_frame"            default="$(arg base_frame)" />
         </include>
 
         <node name="depthimage_to_laserscan" pkg="depthimage_to_laserscan" type="depthimage_to_laserscan">
-            <remap from="camera"           to="$(arg depth_topic)" />
+            <remap from="image"            to="$(arg depth_topic)" />
             <remap from="camera_info"      to="$(arg depth_cam_info_topic)" />
             <remap from="scan"             to="$(arg laserscan_topic)"/>
+
+            <param name="output_frame_id"  value="$(arg base_frame)" />
+            <param name="scan_height"      value="$(arg laserscan_height)"/>
+            <param name="range_min"        value="$(arg range_min)"/>
         </node>
     </group>
 </launch>
