@@ -4,11 +4,8 @@ dist: xenial
 language: generic
 
 notifications:
-  email:
-    recipients:
-      - maintainers@uwreact.ca
-    on_success: change #[always|never|change] # default: change
-    on_failure: change #[always|never|change] # default: always
+  email: false
+  # TODO(matthew-reynolds): Branch-specific notifications. See #75
 
 env:
   global:
