@@ -4,14 +4,14 @@
   <version>0.0.0</version>
   <description>GUI for visualizing UW React path planning Neural Network</description>
 
-  <maintainer email="dev@uwreact.ca">UW React Software Team</maintainer>
+  <maintainer email="maintainers@uwreact.ca">UW React Software Team</maintainer>
 
   <license>BSD-3</license>
 
-  <url type="website">http://uwreact.ca</url> 
-  <url type="repository">http://github.com/uw_react/uwreact_robot/</url> 
-  <url type="bugtracker">http://github.com/uw_react/uwreact_robot/issues</url> 
-  
+  <url type="website">http://uwreact.ca</url>
+  <url type="repository">http://github.com/uw_react/uwreact_robot/</url>
+  <url type="bugtracker">http://github.com/uw_react/uwreact_robot/issues</url>
+
   <buildtool_depend>catkin</buildtool_depend>
   <depend>python_qt_binding</depend>
 
