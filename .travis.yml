@@ -6,7 +6,7 @@ language: generic
 notifications:
   email:
     recipients:
-      - dev@uwreact.ca
+      - maintainers@uwreact.ca
     on_success: change #[always|never|change] # default: change
     on_failure: change #[always|never|change] # default: always
 

@@ -4,7 +4,7 @@
   <version>0.0.0</version>
   <description>3D models and configuration of the UW REACT robots and environments</description>
 
-  <maintainer email="dev@uwreact.ca">UW REACT Software Team</maintainer>
+  <maintainer email="maintainers@uwreact.ca">UW REACT Software Team</maintainer>
 
   <license>BSD-3</license>
 
