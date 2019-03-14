@@ -1,53 +1,73 @@
 <?xml version="1.0"?>
 
 <launch>
+    <!-- TODO(wraftus): Make names of ZEDs more descriptive depending on location on robot-->
     <arg name="zed_id1"               default="0" />
+    <arg name="verbose"               default="false" />
 
-    <arg name="pose_frame"            default="map" />
-    <arg name="camera_model"          default="0" /> <!-- 0=ZED, 1=ZEDM-->
-    <arg name="serial_number"         default="0" />
-    <arg name="verbose"               default="true" />
-
-    <arg name="resolution"            default="2" /> <!--0=RESOLUTION_HD2K, 1=RESOLUTION_HD1080, 2=RESOLUTION_HD720, 3=RESOLUTION_VGA -->
+    <arg name="resolution"            default="2" /> 
+    <!--0=RESOLUTION_HD2K, 1=RESOLUTION_HD1080, 2=RESOLUTION_HD720, 3=RESOLUTION_VGA -->
     <arg name="frame_rate"            default="30" />
     <!-- RESOLUTION_HD2K   -> 2208*1242, available framerates: 15 fps.
          RESOLUTION_HD1080 -> 1920*1080, available framerates: 15, 30 fps.
          RESOLUTION_HD720  -> 1280*720,  available framerates: 15, 30, 60 fps.
          RESOLUTION_VGA    -> 672*376,   available framerates: 15, 30, 60, 100 fps. -->
 
-    <arg name="depth_topic"           default="depth/depth_registered" />
-    <arg name="depth_cam_info_topic"  default="depth/camera_info" />
-    <arg name="laserscan_topic"       default="depth/laserscan"/>
+    <!-- Definition coordinate frames -->
+    <arg name="publish_tf"                    default="true" />
+    <arg name="publish_map_tf"                default="true" />
+    <arg name="base_frame"                    default="zed_camera_center" />
 
-    <arg name="base_frame"            default="zed_camera_center"/>
-    <arg name="laserscan_height"      default="10"/>
-    <arg name="range_min"             default="0.45"/>	
+    <arg name="camera_flip"                   default="false" />
+
+    <arg name="depth"                         default="depth/depth_registered" />
+    <arg name="depth_cam_info"                default="depth/camera_info" />
+    <arg name="laserscan"                     default="depth/laserscan"/>
 
     <!-- First ZED camera -->
     <group ns="zed1">
-        <include file="$(find zed_wrapper)/launch/zed_camera.launch">
-            <arg name="zed_id"                value="$(arg zed_id1)" />
+        <node name="zed_wrapper" pkg="zed_wrapper" type="zed_wrapper_node" output="screen" required="true">
+            <param name="zed_id"                value="$(arg zed_id1)" />
+            <param name="camera_model"          value="0" />
+            <param name="verbose"               value="$(arg verbose)" />
+            
+            <param name="resolution"            value="$(arg resolution)" />
+            <param name="frame_rate"            value="$(arg frame_rate)" />
+            <param name="gain"                  value="100" />
+            <param name="exposure"              value="100" />
+            <param name="auto_exposure"         value="true" />
+            <param name="mat_resize_factor"     value="1.0" />
+            
+            <param name="quality"               value="1" />
+            <param name="sensing_mode"          value="0" />
+            <param name="openni_depth_mode"     value="0" />
+            <param name="confidence"            value="100" />
+            <param name="max_depth"             value="10.0" />
+            <param name="depth_stabilization"   value="1" />
+            
+            <param name="pose_smoothing"        value="false" />
+            <param name="spatial_memory"        value="false" />
+            <param name="floor_alignment"       value="false" />
+            <param name="camera_flip"           value="false" />
+            <param name="publish_tf"            value="$(arg publish_tf)" />
+            <param name="publish_map_tf"        value="$(arg publish_map_tf)" />
+            <param name="init_odom_with_first_valid_pose"   value="true" />
+            <param name="publish_pose_covariance"   value="false" />
 
-            <arg name="pose_frame"            value="$(arg pose_frame)" />
-            <arg name="camera_model"          value="$(arg camera_model)" />
-            <arg name="serial_number"         default="$(arg serial_number)" />
-            <arg name="resolution"            default="$(arg resolution)" />
-            <arg name="frame_rate"            default="$(arg frame_rate)" />
-            <arg name="verbose"               default="$(arg verbose)" />
-
-            <arg name="depth_topic"           default="$(arg depth_topic)" />
-            <arg name="depth_cam_info_topic"  default="$(arg depth_cam_info_topic)" />
-            <arg name="base_frame"            default="$(arg base_frame)" />
-        </include>
+            <param name="depth_topic"           value="$(arg depth)" />
+            <param name="depth_cam_info_topic"  value="$(arg depth_cam_info)" />
+            <param name="base_frame"            value="$(arg base_frame)" />
+        </node>
 
         <node name="depthimage_to_laserscan" pkg="depthimage_to_laserscan" type="depthimage_to_laserscan">
-            <remap from="image"            to="$(arg depth_topic)" />
-            <remap from="camera_info"      to="$(arg depth_cam_info_topic)" />
-            <remap from="scan"             to="$(arg laserscan_topic)"/>
+            <remap from="image"            to="$(arg depth)" />
+            <remap from="camera_info"      to="$(arg depth_cam_info)" />
+            <remap from="scan"             to="$(arg laserscan)"/>
 
             <param name="output_frame_id"  value="$(arg base_frame)" />
-            <param name="scan_height"      value="$(arg laserscan_height)"/>
-            <param name="range_min"        value="$(arg range_min)"/>
+            <!-- TODO(wraftus): Play around with scan_height and range_min -->
+            <param name="scan_height"      value="10"/> 
+            <param name="range_min"        value="0.45"/>
         </node>
     </group>
 </launch>
