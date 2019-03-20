@@ -8,9 +8,9 @@
 
   <license>BSD-3</license>
 
-  <url type="website">http://uwreact.ca</url>
-  <url type="bugtracker">http://github.com/uwreact/uwreact_robot/issues</url>
-  <url type="repository">http://github.com/uwreact/uwreact_robot/</url>
+  <url type="website">https://uwreact.ca</url>
+  <url type="bugtracker">https://github.com/uwreact/uwreact_robot/issues</url>
+  <url type="repository">https://github.com/uwreact/uwreact_robot</url>
 
   <buildtool_depend>catkin</buildtool_depend>
 
