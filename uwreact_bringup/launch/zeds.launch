@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+
+<launch>
+    <!-- TODO(wraftus): Play around with scan_height and range_min -->
+    <arg name="scan_height"      default="10"/> 
+    <arg name="range_min"        default="0.45"/>
+    
+    <!-- TODO(wraftus): Make names of ZEDs more descriptive depending on location on robot-->
+    <!-- First ZED camera -->
+    <group ns="zed0">
+        <node name="zed_wrapper" pkg="zed_wrapper" type="zed_wrapper_node" output="screen" respawn="true">
+            <param name="zed_id"                value="0" />
+            <param name="camera_model"          value="0" />
+            <param name="verbose"               value="false" />
+            
+            <param name="resolution"            value="2" />
+            <param name="frame_rate"            value="30" />
+            <param name="auto_exposure"         value="true" />
+            <param name="mat_resize_factor"     value="1.0" />
+            
+            <param name="quality"               value="1" />
+            <param name="sensing_mode"          value="0" />
+            <param name="openni_depth_mode"     value="0" />
+            <param name="confidence"            value="100" />
+            <param name="max_depth"             value="10.0" />
+            <param name="depth_stabilization"   value="1" />
+            
+            <param name="pose_smoothing"        value="false" />
+            <param name="spatial_memory"        value="false" />
+            <param name="floor_alignment"       value="false" />
+            <param name="camera_flip"           value="false" />
+            <param name="publish_tf"            value="true" />
+            <param name="publish_map_tf"        value="true" />
+            <param name="init_odom_with_first_valid_pose"   value="true" />
+            <param name="publish_pose_covariance"   value="false" />
+
+            <param name="base_frame"            value="zed_camera_center" />
+        </node>
+
+        <node name="depthimage_to_laserscan" pkg="depthimage_to_laserscan" type="depthimage_to_laserscan">
+            <remap from="image"            to="depth/depth_registered" />
+
+            <param name="output_frame_id"  value="zed_camera_center" />
+
+            <param name="scan_height"      value="$(arg scan_height)"/> 
+            <param name="range_min"        value="$(arg range_min)"/>
+        </node>
+    </group>
+</launch>
