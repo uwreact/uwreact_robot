@@ -25,9 +25,18 @@
 # POSSIBILITY OF SUCH DAMAGE.
 ##############################################################################
 
+"""
+TODO(Ivan-Z): Module docstring
+"""
+
 from python_qt_binding.QtWidgets import QMainWindow
 
+
 class MainWindow(QMainWindow):
-	def __init__(self, *args, **kwargs):
-		super(MainWindow, self).__init__(*args, **kwargs)
-		self.setWindowTitle("UW React Planning Visualization")
+    """
+    Main window for the visualizer
+    """
+
+    def __init__(self, *args, **kwargs):
+        super(MainWindow, self).__init__(*args, **kwargs)
+        self.setWindowTitle("UW React Planning Visualization")

@@ -1,0 +1,15 @@
+[MASTER]
+max-line-length = 120
+enable = all
+
+# Allow use of len(sequence) in conditionals
+disable = len-as-condition, locally-disabled, suppressed-message
+
+# Don't warn on TODOs
+notes =
+
+# Don't format the boilerplate setup.py files
+ignore = setup.py
+
+# Run 4 concurrent jobs to speed up
+jobs = 4

@@ -27,13 +27,26 @@
 # POSSIBILITY OF SUCH DAMAGE.
 ##############################################################################
 
+"""
+Launch the planning network visualizer
+"""
+
 from python_qt_binding.QtWidgets import QApplication
 from network_visualizer.window import MainWindow
 
-app = QApplication([])
 
-window = MainWindow()
-window.resize(2000, 2000)
-window.show()
+def main():
+    """
+    Main function
+    """
+    app = QApplication([])
 
-app.exec_()
+    window = MainWindow()
+    window.resize(2000, 2000)
+    window.show()
+
+    app.exec_()
+
+
+if __name__ == '__main__':
+    main()
