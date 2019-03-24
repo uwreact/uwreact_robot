@@ -211,6 +211,9 @@ def test_catkin_lint():
     parent = subprocess.check_output(['pwd', '-L']).decode('utf-8').strip()
     parent += '/..'
 
+    print(parent)
+    subprocess.call(['ls', parent])
+
     ret = subprocess.call(['catkin_lint', '.', '--resolve-env', '-W1', '--quiet', '--strict', '--package-path', parent])
     if ret != 0:
         print('catkin_lint failed!')
