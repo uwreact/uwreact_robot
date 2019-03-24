@@ -27,7 +27,7 @@ Checks:  '-*,
 # readability-braces-around-statements
 
 WarningsAsErrors: ''
-HeaderFilterRegex: ''
+HeaderFilterRegex: '.*/src/uwreact_robot/.*'
 AnalyzeTemporaryDtors: false # TODO: Figure out what this does
 FormatStyle: none
 CheckOptions:
