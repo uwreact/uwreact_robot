@@ -211,9 +211,6 @@ def test_catkin_lint():
     parent = subprocess.check_output(['pwd', '-L']).decode('utf-8').strip()
     parent += '/..'
 
-    print(parent)
-    subprocess.call(['ls', parent])
-
     ret = subprocess.call(['catkin_lint', '.', '--resolve-env', '-W1', '--quiet', '--strict', '--package-path', parent])
     if ret != 0:
         print('catkin_lint failed!')
@@ -230,6 +227,10 @@ def main():
 
     # Make sure pip is up to date
     subprocess.call(['pip', 'install', '--upgrade', 'pip', '-q'])
+
+    # Print tree for debugging
+    install_program('tree')
+    subprocess.call(['tree', '/root'])
 
     fails = 0
 
