@@ -207,6 +207,11 @@ def test_catkin_lint():
     if install_program('catkin_lint', pip=True) != 0:
         return 1
 
+    print('Cur dir:')
+    subprocess.call(['ls', '.'])
+
+    print('Parent dir:')
+    subprocess.call(['ls', '..'])
     ret = subprocess.call(['catkin_lint', '.', '--resolve-env', '-W1', '--quiet', '--strict', '--package-path', '..'])
     if ret != 0:
         print('catkin_lint failed!')
