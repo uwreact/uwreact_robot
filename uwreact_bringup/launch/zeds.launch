@@ -1,36 +1,20 @@
 <?xml version="1.0"?>
 
 <launch>
+    <!-- TODO(wraftus): Play around with scan_height and range_min -->
+    <arg name="scan_height"      default="10"/> 
+    <arg name="range_min"        default="0.45"/>
+    
     <!-- TODO(wraftus): Make names of ZEDs more descriptive depending on location on robot-->
-    <arg name="zed_id1"               default="0" />
-    <arg name="verbose"               default="false" />
-
-    <arg name="resolution"            default="2" /> 
-    <!--0=RESOLUTION_HD2K, 1=RESOLUTION_HD1080, 2=RESOLUTION_HD720, 3=RESOLUTION_VGA -->
-    <arg name="frame_rate"            default="30" />
-    <!-- RESOLUTION_HD2K   -> 2208*1242, available framerates: 15 fps.
-         RESOLUTION_HD1080 -> 1920*1080, available framerates: 15, 30 fps.
-         RESOLUTION_HD720  -> 1280*720,  available framerates: 15, 30, 60 fps.
-         RESOLUTION_VGA    -> 672*376,   available framerates: 15, 30, 60, 100 fps. -->
-
-    <!-- Definition coordinate frames -->
-    <arg name="publish_tf"                    default="true" />
-    <arg name="publish_map_tf"                default="true" />
-    <arg name="base_frame"                    default="zed_camera_center" />
-
-    <arg name="depth_topic"                   default="depth_registered" />
-    <arg name="depth_cam_info_topic"          default="depth/camera_info" />
-    <arg name="laserscan_topic"               default="laserscan"/>
-
     <!-- First ZED camera -->
-    <group ns="zed1">
+    <group ns="zed0">
         <node name="zed_wrapper" pkg="zed_wrapper" type="zed_wrapper_node" output="screen" required="true">
-            <param name="zed_id"                value="$(arg zed_id1)" />
+            <param name="zed_id"                value="0" />
             <param name="camera_model"          value="0" />
-            <param name="verbose"               value="$(arg verbose)" />
+            <param name="verbose"               value="false" />
             
-            <param name="resolution"            value="$(arg resolution)" />
-            <param name="frame_rate"            value="$(arg frame_rate)" />
+            <param name="resolution"            value="2" />
+            <param name="frame_rate"            value="30" />
             <param name="gain"                  value="100" />
             <param name="exposure"              value="100" />
             <param name="auto_exposure"         value="true" />
@@ -47,25 +31,23 @@
             <param name="spatial_memory"        value="false" />
             <param name="floor_alignment"       value="false" />
             <param name="camera_flip"           value="false" />
-            <param name="publish_tf"            value="$(arg publish_tf)" />
-            <param name="publish_map_tf"        value="$(arg publish_map_tf)" />
+            <param name="publish_tf"            value="true" />
+            <param name="publish_map_tf"        value="true" />
             <param name="init_odom_with_first_valid_pose"   value="true" />
             <param name="publish_pose_covariance"   value="false" />
 
-            <param name="depth_topic"           value="$(arg depth_topic)" />
-            <param name="depth_cam_info_topic"  value="$(arg depth_cam_info_topic)" />
-            <param name="base_frame"            value="$(arg base_frame)" />
+            <param name="depth_topic"           value="depth_registered" />
+            <param name="base_frame"            value="zed_camera_center" />
         </node>
 
         <node name="depthimage_to_laserscan" pkg="depthimage_to_laserscan" type="depthimage_to_laserscan">
-            <remap from="image"            to="$(arg depth_topic)" />
-            <remap from="camera_info"      to="$(arg depth_cam_info_topic)" />
-            <remap from="scan"             to="$(arg laserscan_topic)"/>
+            <remap from="image"            to="depth_registered" />
+            <remap from="camera_info"      to="depth/camera_info" />
+`
+            <param name="output_frame_id"  value="zed_camera_center" />
 
-            <param name="output_frame_id"  value="$(arg base_frame)" />
-            <!-- TODO(wraftus): Play around with scan_height and range_min -->
-            <param name="scan_height"      value="10"/> 
-            <param name="range_min"        value="0.45"/>
+            <param name="scan_height"      value="$(arg scan_height)"/> 
+            <param name="range_min"        value="$(arg range_min)"/>
         </node>
     </group>
 </launch>
