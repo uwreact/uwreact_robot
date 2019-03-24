@@ -58,9 +58,6 @@ def check_package(parameters):
     json.dump(valid_entries, open(cur_file, 'w'))
 
     # Determine the output file, where required changes will be written
-    output_dir = '/'.join([args.ws, 'clang-tidy-fixes'])
-    if not os.path.isdir(output_dir):
-        os.mkdir(output_dir)
     output_file = '/'.join([args.ws, 'clang-tidy-fixes', pkg_name + '_fixes'])
 
     # Setup and run clang-tidy
@@ -70,14 +67,13 @@ def check_package(parameters):
         additional_args = ['-export-fixes', output_file]
 
     devnull = open(os.devnull, 'w')
-    subprocess.check_call(
-        ['run-clang-tidy-7', '-j', '8', '-p', cur_dir] + additional_args, stdout=devnull, stderr=devnull)
+    subprocess.call(['run-clang-tidy-7', '-j', '8', '-p', cur_dir] + additional_args, stdout=devnull, stderr=devnull)
 
     # If fixing, assume that all changes were addressed and the file is now perfect
     if args.fix:
         if not args.quiet:
             print('Finished tidying ' + pkg_name)
-        return False
+        return_val = False
 
     # If not fixing, determine if required changes were found
     else:
@@ -91,13 +87,16 @@ def check_package(parameters):
                 print('Finished checking ' + pkg_name + ', changes required! See ' + output_file)
             if args.verbose:
                 print(open(output_file).read())
-        return found_changes
+        return_val = found_changes
+
+    return return_val
 
 
 def main():
     """
     Main function
     """
+
     parser = argparse.ArgumentParser(
         description='Wrapper for running clang-tidy on a catkin workspace.',
         epilog='Note: In order for clang-tidy to understand which files to tidy, ' +
@@ -105,6 +104,7 @@ def main():
     parser.add_argument('-f', '--fix', help='Attempt to automatically fix issues', action='store_true')
     parser.add_argument('-j', '--jobs', help='Number of packages to tidy concurrently (default=4)', default=4, type=int)
     parser.add_argument('-q', '--quiet', help='Do not produce any stdout output', action='store_true')
+    parser.add_argument('-w', '--workspace', help='The ROS workspace containing the package', default=None)
     parser.add_argument('-v', '--verbose', help='Output generated changefiles to stdout', action='store_true')
     parser.add_argument('packages', nargs='*', help='List of packages to tidy')
     args = parser.parse_args()
@@ -114,20 +114,28 @@ def main():
         exit(-1)
 
     # Determine the ROS workspace and build space
-    cwd = os.path.dirname(os.path.realpath(__file__))
-    args.ws = subprocess.check_output(['catkin', 'locate'], cwd=cwd).decode('utf-8').strip()
-    args.build_dir = subprocess.check_output(
-        'catkin config | grep "Build Space:" | grep -o "/.*"', cwd=cwd, shell=True).decode('utf-8').strip()
+    if args.workspace is None:
+        cwd = os.path.dirname(os.path.abspath(__file__))
+    else:
+        cwd = args.workspace
+
+    try:
+        args.ws = subprocess.check_output(['catkin', 'locate'], cwd=cwd).decode('utf-8').strip()
+        config = subprocess.check_output(['catkin', 'config'], cwd=cwd).decode('utf-8').strip().split('\n')
+        config = [c for c in config if 'Build Space:' in c][0]
+        args.build_dir = '/' + config.split('/', 1)[1]
+    except subprocess.CalledProcessError as error:
+        print(error)
+        exit(1)
 
     # Generate the list of packages to check
     package_list = []
     if len(args.packages) > 0:
 
         # Find all packages in the workspace src directory
-        src_pkgs = subprocess.check_output(['find', args.ws + '/src', '-name',
-                                            'package.xml']).decode('utf-8').strip().split('\n')
-        src_pkgs = [path.replace(args.ws, '') for path in src_pkgs]
-        src_pkgs = [path.replace('src/', '') for path in src_pkgs]
+        src_pkgs = subprocess.check_output(['find', '-L', args.ws + '/src', '-name', 'package.xml'])
+        src_pkgs = src_pkgs.decode('utf-8').strip().split('\n')
+        src_pkgs = [path.replace(args.ws + '/src/', '') for path in src_pkgs]
         src_pkgs = [path.replace('/package.xml', '') for path in src_pkgs]
 
         # Find matching packages in the workspace src directory
@@ -141,6 +149,11 @@ def main():
             package_list.extend([(args, pkg) for pkg in build_pkgs if key in pkg])
     else:
         package_list = [(args, pkg) for pkg in os.listdir(args.build_dir)]
+
+    # Create output dir
+    output_dir = '/'.join([args.ws, 'clang-tidy-fixes'])
+    if not os.path.isdir(output_dir):
+        os.mkdir(output_dir)
 
     # Run clang-tidy on all matching packages
     pool = multiprocessing.pool.ThreadPool(args.jobs)
