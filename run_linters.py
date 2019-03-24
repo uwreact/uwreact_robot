@@ -208,6 +208,8 @@ def test_catkin_lint():
         return 1
 
     print('Cur dir:')
+    subprocess.call(['pwd'])
+    subprocess.call(['pwd', '-P'])
     subprocess.call(['ls', '.'])
 
     print('Parent dir:')
