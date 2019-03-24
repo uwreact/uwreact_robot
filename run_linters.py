@@ -209,7 +209,7 @@ def test_catkin_lint():
 
     # Get the parent dir of the logical working directory in order to be compatible with the CI
     parent = subprocess.check_output(['pwd', '-L']).decode('utf-8').strip()
-    parent += '/..'
+    parent = parent.rsplit('/', 1)[0]
 
     ret = subprocess.call(['catkin_lint', '.', '--resolve-env', '-W1', '--quiet', '--strict', '--package-path', parent])
     if ret != 0:
@@ -227,10 +227,6 @@ def main():
 
     # Make sure pip is up to date
     subprocess.call(['pip', 'install', '--upgrade', 'pip', '-q'])
-
-    # Print tree for debugging
-    install_program('tree')
-    subprocess.call(['tree', '/root'])
 
     fails = 0
 
