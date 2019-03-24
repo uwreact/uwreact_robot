@@ -207,9 +207,8 @@ def test_catkin_lint():
     if install_program('catkin_lint', pip=True) != 0:
         return 1
 
-    ret = subprocess.check_output(['catkin_lint', '.', '--resolve-env', '-W1', '-q']).decode('utf-8').strip()
-    if ret != '':
-        print(ret)
+    ret = subprocess.call(['catkin_lint', '.', '--resolve-env', '-W1', '--quiet', '--strict', '--package-path', '..'])
+    if ret != 0:
         print('catkin_lint failed!')
         return 1
 
