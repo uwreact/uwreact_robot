@@ -1,6 +1,5 @@
-zed_id: 0
 camera_model: 0
-verbose: false
+verbose: true
 
 resolution: 2
 frame_rate: 30

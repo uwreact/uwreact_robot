@@ -9,6 +9,24 @@
     <!-- First ZED camera -->
     <group ns="zed0">
         <node name="zed_wrapper" pkg="zed_wrapper" type="zed_wrapper_node" output="screen" respawn="true">
+            <param name="serial_number"  value="000019980" />
+            <rosparam command="load" file="$(find uwreact_bringup)/launch/configs/zed.yaml" />
+        </node>
+
+        <node name="depthimage_to_laserscan" pkg="depthimage_to_laserscan" type="depthimage_to_laserscan">
+            <remap from="image"            to="depth/depth_registered" />
+
+            <param name="output_frame_id"  value="zed_camera_center" />
+
+            <param name="scan_height"      value="$(arg scan_height)"/> 
+            <param name="range_min"        value="$(arg range_min)"/>
+        </node>
+    </group>
+    
+    <!-- Second ZED Camera -->
+    <group ns="zed1">
+        <node name="zed_wrapper" pkg="zed_wrapper" type="zed_wrapper_node" output="screen" respawn="true">
+            <param name="serial_number"  value="000019981" />
             <rosparam command="load" file="$(find uwreact_bringup)/launch/configs/zed.yaml" />
         </node>
 
