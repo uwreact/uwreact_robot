@@ -1,0 +1,26 @@
+zed_id: 0
+camera_model: 0
+verbose: false
+
+resolution: 2
+frame_rate: 30
+auto_exposure: true
+mat_resize_factor: 1.0
+
+quality: 1
+sensing_mode: 0
+openni_depth_mode: 0
+confidence: 100
+max_depth: 10.0
+depth_stabilization: 1
+
+pose_smoothing: false
+spatial_memory: false
+floor_alignment: false
+camera_flip: false
+publish_tf: true
+publish_map_tf: true
+init_odom_with_first_valid_pose: true
+publish_pose_covariance: false
+
+base_frame: "zed_camera_center"
