@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>uwreact_robot</name>
+  <name>uwreact_msgs</name>
   <version>0.0.0</version>
-  <description>The software behind UW REACT's fully autonomous FIRST robots</description>
+  <description>State-tracking messages to be used throughout UW REACT's fully autonomous FIRST robots</description>
 
   <maintainer email="maintainers@uwreact.ca">UW REACT Software Team</maintainer>
 
@@ -14,14 +14,10 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <exec_depend>uwreact_bringup</exec_depend>
-  <exec_depend>uwreact_controls</exec_depend>
-  <exec_depend>uwreact_description</exec_depend>
-  <exec_depend>uwreact_msgs</exec_depend>
-  <exec_depend>uwreact_perception</exec_depend>
-  <exec_depend>uwreact_planning</exec_depend>
+  <depend>geometry_msgs</depend>
+  <depend>shape_msgs</depend>
+  <depend>std_msgs</depend>
+  <build_depend>message_generation</build_depend>
+  <exec_depend>message_runtime</exec_depend>
 
-  <export>
-    <metapackage/>
-  </export>
 </package>
