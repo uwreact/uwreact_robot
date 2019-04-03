@@ -16,12 +16,12 @@ uint8 BAY_CARGO_SHIP_FAR_RIGHT   = 7
 
 Header    header
 float32   left_hp_cargo
-float32   left_hp_hatch_panel
+float32   left_hp_hatch
 float32   right_hp_cargo
-float32   right_hp_hatch_panel
+float32   right_hp_hatch
 float32[] left_rocket_cargo
-float32[] left_rocket_hatch_panel
+float32[] left_rocket_hatch
 float32[] right_rocket_cargo
-float32[] right_rocket_hatch_panel
+float32[] right_rocket_hatch
 float32[] cargo_ship_cargo
-float32[] cargo_ship_hatch_panel
+float32[] cargo_ship_hatch
