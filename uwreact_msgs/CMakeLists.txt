@@ -12,7 +12,10 @@ find_package(catkin REQUIRED COMPONENTS
 # List messages for generation
 add_message_files(
   FILES
+    EntityArray.msg
     FieldState.msg
+    GenericEntity.msg
+    RobotEntity.msg
 )
 
 # Generate messages with the specified dependencies
