@@ -6,5 +6,5 @@ Header        header
 GenericEntity entity
 uint8         alliance
 uint8         team_number
-float32       has_cargo_confidenceasdfasdfa
+float32       has_cargo_confidence
 float32       has_hatch_confidence
