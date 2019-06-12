@@ -11,7 +11,7 @@ env:
   global:
     # Use StereoLabs' Docker image to avoid having to manually download
     # and install CUDA and the ZED SDK
-    - DOCKER_BASE_IMAGE="stereolabs/zed:ubuntu1804-cuda10.0-zed2.7"
+    - DOCKER_BASE_IMAGE="stereolabs/zed:ubuntu1804-cuda10.0-zed2.8"
 
     # Install non-distributed dependencies
     - UPSTREAM_WORKSPACE="file"
