@@ -97,10 +97,9 @@ def main():
     Main function
     """
 
-    parser = argparse.ArgumentParser(
-        description='Wrapper for running clang-tidy on a catkin workspace.',
-        epilog='Note: In order for clang-tidy to understand which files to tidy, ' +
-        'the workspace must be built with -DCMAKE_EXPORT_COMPILE_COMMANDS=ON.')
+    parser = argparse.ArgumentParser(description='Wrapper for running clang-tidy on a catkin workspace.',
+                                     epilog='Note: In order for clang-tidy to understand which files to tidy, ' +
+                                     'the workspace must be built with -DCMAKE_EXPORT_COMPILE_COMMANDS=ON.')
     parser.add_argument('-f', '--fix', help='Attempt to automatically fix issues', action='store_true')
     parser.add_argument('-j', '--jobs', help='Number of packages to tidy concurrently (default=4)', default=4, type=int)
     parser.add_argument('-q', '--quiet', help='Do not produce any stdout output', action='store_true')
