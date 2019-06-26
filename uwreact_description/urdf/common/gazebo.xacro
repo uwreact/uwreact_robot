@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="load_frc_plugin">
+    <gazebo>
+      <plugin name="frc_robot_sim" filename="libfrc_robot_sim.so">
+        <robotNamespace>/</robotNamespace>
+        <!-- <controlPeriod>0.1</controlPeriod> -->        <!-- period of controller updates. should match loop_hz -->
+        <!-- <eStopTopic>e_stop</eStopTopic> -->        <!-- topic to subscribe to (std_msgs/Bool) for estop -->
+      </plugin>
+    </gazebo>
+  </xacro:macro>
+
+</robot>
