@@ -18,8 +18,8 @@ env:
     - ROSINSTALL_FILENAME="uwreact_robot.rosinstall"
 
     # Run linters and style checks
-    - CATKIN_CONFIG='-DCMAKE_EXPORT_COMPILE_COMMANDS=ON'
-    - AFTER_SCRIPT="cd /root/catkin_ws/src/uwreact_robot; ./run_linters.py"
+    - CATKIN_CONFIG="-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+    - AFTER_SCRIPT="source /root/catkin_ws/install/setup.bash; cd /root/catkin_ws/src/uwreact_robot; ./scripts/run_linters.py"
   matrix:
     - ROS_DISTRO="melodic"   ROS_REPO="ros"
     - ROS_DISTRO="melodic"   ROS_REPO="ros-testing"

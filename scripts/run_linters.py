@@ -139,7 +139,8 @@ def test_clang_tidy():
         print('Using default workspace {0}'.format(workspace))
 
     # Run clang-tidy
-    ret = subprocess.call(['./run_clang_tidy.py', '-w', workspace, 'uwreact_robot', '--verbose'])
+    script = os.path.dirname(os.path.abspath(__file__)) + '/run_clang_tidy.py'
+    ret = subprocess.call([script, '-w', workspace, 'uwreact_robot', '--verbose'])
 
     if ret != 0:
         print('C++ code does not meet quality requirements!')
@@ -151,7 +152,7 @@ def test_clang_tidy():
 
 def test_yapf():
     """
-    Run pylint
+    Check if yapf wants to make changes
     """
 
     print('\n----------\n')
@@ -172,7 +173,7 @@ def test_yapf():
 
 def test_pylint():
     """
-    Run pylint
+    Check code quality with pylint
     """
 
     print('\n----------\n')
@@ -182,10 +183,14 @@ def test_pylint():
     if install_program('pylint', pip=True) != 0:
         return 1
 
-    files = subprocess.check_output(['find', '-L', '.', '-name', '*.py', '-o', '-iregex', '.*/scripts/.*'])
+    # Find all files with extension .py or files in script dirs with no extension
+    files = subprocess.check_output(['find', '.', '-name', '*.py', '-o', '-iregex', '.*/scripts/\\w+', '-type', 'f'])
     files = files.decode('utf-8').strip().split('\n')
-    files = [f for f in files if '.ci_config' not in f]
-    ret = subprocess.call(['pylint', '-s', 'n'] + files)
+    files = [f for f in files if '.ci_config' not in f and f != '']
+    if len(files) != 0:
+        ret = subprocess.call(['pylint', '-s', 'n'] + files)
+    else:
+        ret = 0
 
     if ret != 0:
         print('Python code does not meet quality requirements!')
