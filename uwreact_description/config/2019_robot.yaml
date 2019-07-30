@@ -1,0 +1,109 @@
+### Actuators and Sensors ###
+
+frc_robot_hw_real:
+  joints: &joints
+
+    lfc_wheel_joint:
+      type: can_talon_srx
+      id: 0
+      velocity_gains: {p: 0.1, i: 0.2, d: 0.4, i_clamp: 1, f: 1}
+      feedback: quad_encoder
+
+    lrc_wheel_joint:
+      type: can_talon_srx
+      id: 1
+      follow: lfc_wheel_joint
+
+    rfc_wheel_joint:
+      type: can_talon_srx
+      id: 2
+      velocity_gains: {p: 0.1, i: 0.2, d: 0.4, i_clamp: 1, f: 1}
+      feedback: quad_encoder
+
+    rrc_wheel_joint:
+      type: can_talon_srx
+      id: 3
+      follow: rfc_wheel_joint
+
+    elevator_joint:
+      type: can_talon_srx
+      id: 4
+      velocity_gains: {p: 0.1, i: 0.2, d: 0.4, i_clamp: 1, f: 1}
+      feedback: quad_encoder
+
+    wrist_joint:
+      type: can_talon_srx
+      id: 5
+      velocity_gains: {p: 0.1, i: 0.2, d: 0.4, i_clamp: 1, f: 1}
+      feedback: pulse_width
+
+    roller_joint: # TODO: Remove PID and feedback, use voltage control
+      type: can_talon_srx
+      id: 6
+      velocity_gains: {p: 0.1, i: 0.2, d: 0.4, i_clamp: 1, f: 1}
+      feedback: quad_encoder
+
+frc_robot_hw_sim:
+  joints: *joints
+
+### Controllers ###
+
+# Publish joint states
+joint_state_controller:
+  type:         joint_state_controller/JointStateController
+  publish_rate: 20
+
+# Publish IMU states
+imu_sensor_controller:
+  type:         imu_sensor_controller/ImuSensorController
+  publish_rate: 20
+
+# Publish PDP states
+pdp_state_controller:
+  type:         pdp_state_controller/PDPStateController
+  publish_rate: 20
+
+# Publish compressor states
+compressor_state_controller:
+  type:         compressor_controller/CompressorStateController
+  publish_rate: 10
+
+# Command compressor closed-loop control
+compressor_cmd_controller:
+  type:         compressor_controller/CompressorCommandController
+  joint:        compressor
+
+# Command drive train
+drive_train_controller:
+  type:         "diff_drive_controller/DiffDriveController"
+  left_wheel:   ['lfc_wheel_joint']
+  right_wheel:  ['rfc_wheel_joint']
+  pose_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 0.03]
+  twist_covariance_diagonal: [0.001, 0.001, 0.001, 1000000.0, 1000000.0, 0.03]
+  publish_cmd: true
+  allow_multiple_cmd_vel_publishers: true
+
+# Command elevator position
+elevator_controller:
+  type:         "velocity_controllers/JointPositionController"
+  joint:        "elevator_joint"
+  pid:
+    p: 2.0
+    i: 0.5
+    d: 0
+
+# Command wrist position
+wrist_controller:
+  type:         "velocity_controllers/JointPositionController"
+  joint:        "wrist_joint"
+  pid:
+    p: 2.0
+    i: 0.5
+    d: 0
+
+# Command roller velocity
+roller_controller:
+  type:         "velocity_controllers/JointVelocityController"
+  joint:        "roller_joint"
+
+# TODO: Solenoids
