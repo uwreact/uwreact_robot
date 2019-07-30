@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+
+<!-- Main robot bringup launch file -->
+<!-- If arg sim:=false, start the robot on real hw -->
+<!-- If arg sim:=true, spawn a simulated robot in a Gazebo world -->
+<launch>
+  <arg name="robot"     default="2019_robot" doc="The name of the robot"/>
+  <arg name="urdf"      default="2019/robot" doc="The path to the robot URDF"/>
+  <arg name="debug"     default="false"      doc="Whether to enable debugging (eg GDB)"/>
+  <arg name="log_debug" default="false"      doc="Whether to output DEBUG log msgs"/>
+  <arg name="sim"       default="false"      doc="Whether to use simulation or real HW"/>
+  <arg name="world"     default="empty"      doc="The world file to use in simulation"/>
+
+
+  <!-- Optionally set the log level to DEBUG -->
+  <env if="$(arg log_debug)" name="ROSCONSOLE_CONFIG_FILE" value="$(find uwreact_bringup)/config/rosconsole_debug.config"/>
+
+  <!-- Controls -->
+  <include file="$(find uwreact_bringup)/launch/controls/controls.launch">
+    <arg name="robot" value="$(arg robot)"/>
+    <arg name="urdf"  value="$(arg urdf)"/>
+    <arg name="debug" value="$(arg debug)"/>
+    <arg name="sim"   value="$(arg sim)"/>
+    <arg name="world" value="$(arg world)"/>
+  </include>
+
+  <!-- Perception -->
+  <include file="$(find uwreact_bringup)/launch/perception/perception.launch">
+    <arg name="sim" value="$(arg sim)"/>
+  </include>
+</launch>
