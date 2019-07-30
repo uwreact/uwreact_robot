@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<!-- Main perception launch file -->
+<launch>
+  <arg name="sim"/>
+
+  <!-- Run all subsequent nodes on the Jetson -->
+  <!-- TODO: Setup hostname and username -->
+  <machine name="jetson" address="jetson" default="true"/>
+
+  <group unless="$(arg sim)">
+    <include file="$(find uwreact_bringup)/launch/perception/zeds.launch"/>
+  </group>
+</launch>
