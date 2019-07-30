@@ -14,14 +14,19 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <!-- CONTROLS DEPENDENCIES -->
+  <!-- General dependencies -->
+  <exec_depend>uwreact_description</exec_depend>
+
+  <!-- Controls dependencies -->
+  <exec_depend>controller_manager</exec_depend>
   <exec_depend>frc_robot_hw</exec_depend>
   <exec_depend>frc_robot_sim</exec_depend>
-  
-  <!-- PERCEPTION DEPENDENCIES -->
+  <exec_depend>robot_state_publisher</exec_depend>
+
+  <!-- Perception dependencies -->
   <exec_depend>zed_wrapper</exec_depend>
   <exec_depend>depthimage_to_laserscan</exec_depend>
 
-  <!-- PLANNING DEPENDENCIES -->
+  <!-- Planning dependencies -->
 
 </package>
