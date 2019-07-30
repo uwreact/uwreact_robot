@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+
+<!-- REP 103: X=Forward, Y=Left, Z=Up -->
+
+<robot name="2019_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="../common/gazebo.xacro"/>
+  <xacro:include filename="../common/materials.xacro"/>
+  <xacro:include filename="../common/simple_shapes.xacro"/>
+  <xacro:include filename="parameters.xacro"/>
+
+
+  <!-- Macros -->
+
+  <xacro:macro name="drive_wheel" params="name xyz:='0 0 0' rpy:='${-pi/2} 0 0' color:='Red' mimic:=''">
+    <joint name="${name}_joint" type="continuous">
+
+      <origin xyz="${xyz}" rpy="${rpy}"/>
+      <axis xyz="0 0 1"/>
+      <parent link="base_link"/>
+      <child link="${name}"/>
+
+      <xacro:if value="${mimic != ''}">
+        <!-- This does nothing -->
+        <mimic joint="${mimic}_joint"/>
+      </xacro:if>
+      <xacro:unless value="${mimic != ''}">
+        <sensor name="${name}_joint_enc" type="encoder"/>
+      </xacro:unless>
+    </joint>
+
+    <xacro:if value="${mimic != ''}">
+      <gazebo>
+        <joint name="${name}_joint_gearbox" type="gearbox">
+          <parent>${mimic}</parent>
+          <child>${name}</child>
+          <gearbox_reference_body>base_link</gearbox_reference_body>
+          <gearbox_ratio>-1</gearbox_ratio>
+          <axis>
+            <xyz>0 1 0</xyz>
+          </axis>
+          <axis2>
+            <xyz>0 1 0</xyz>
+          </axis2>
+        </joint>
+      </gazebo>
+    </xacro:if>
+
+    <xacro:uniform_cylinder name="${name}" color="${color}" mass="${wheel_mass}" len="${wheel_thickness}" rad="${wheel_radius}"/>
+  </xacro:macro>
+
+
+  <!-- Main robot geometry -->
+
+  <xacro:uniform_box name="base_link" color="Turquoise" mass="50" lx="${chassis_length}" ly="${chassis_width}" lz="${chassis_height}"/>
+
+  <xacro:uniform_box name="elevator_frame_left" color="Green" mass="1" lx="${2*IN_TO_M}" ly="${1*IN_TO_M}" lz="${elevator_frame_height}" xyz="0 ${0.5*IN_TO_M} ${elevator_frame_height/2}"/>
+  <xacro:uniform_box name="elevator_frame_right" color="Green" mass="1" lx="${2*IN_TO_M}" ly="${1*IN_TO_M}" lz="${elevator_frame_height}" xyz="0 ${-0.5*IN_TO_M} ${elevator_frame_height/2}"/>
+
+  <xacro:uniform_box name="stage_base" color="Blue" mass="1" lx="${2*IN_TO_M}" ly="${elevator_width}" lz="${1*IN_TO_M}" xyz="0 0 ${0.5*IN_TO_M}"/>
+  <xacro:uniform_box name="stage_top" color="Blue" mass="1" lx="${2*IN_TO_M}" ly="${elevator_width}" lz="${1*IN_TO_M}" xyz="0 0 ${0.5*IN_TO_M}"/>
+  <xacro:uniform_box name="stage_left" color="Blue" mass="1" lx="${2*IN_TO_M}" ly="${1*IN_TO_M}" lz="${elevator_stage_height}" xyz="0 ${-0.5*IN_TO_M} ${elevator_stage_height/2}"/>
+  <xacro:uniform_box name="stage_right" color="Blue" mass="1" lx="${2*IN_TO_M}" ly="${1*IN_TO_M}" lz="${elevator_stage_height}" xyz="0 ${0.5*IN_TO_M} ${elevator_stage_height/2}"/>
+
+  <xacro:uniform_box name="carriage" color="Gold" mass="2" lx="${2*IN_TO_M}" ly="${elevator_carriage_width}" lz="${elevator_carriage_height}" xyz="0 0 ${elevator_carriage_height/2}"/>
+
+  <xacro:uniform_box name="wrist_left" color="Red" mass="0.5" lx="${wrist_length}" ly="${1*IN_TO_M}" lz="${2*IN_TO_M}" xyz="${wrist_length/2} 0 0"/>
+  <xacro:uniform_box name="wrist_right" color="Red" mass="0.5" lx="${wrist_length}" ly="${1*IN_TO_M}" lz="${2*IN_TO_M}" xyz="${wrist_length/2} 0 0"/>
+  <xacro:uniform_box name="wrist_end" color="Red" mass="0.5" lx="${1*IN_TO_M}" ly="${wrist_width}" lz="${2*IN_TO_M}" xyz="${0.5*IN_TO_M} 0 0"/>
+
+  <xacro:uniform_cylinder name="cargo_roller" color="Yellow" mass="0.5" len="${wrist_width}" rad="${roller_radius}" xyz="0 0 0" rpy="${pi/2} 0 0"/>
+
+
+  <!-- Joints -->
+
+  <joint name="elevator_frame_left_joint" type="fixed">
+    <origin xyz="${chassis_length/2 - 10.6875*IN_TO_M} ${elevator_width/2} ${chassis_height/2}"/>
+    <parent link="base_link"/>
+    <child link="elevator_frame_left"/>
+  </joint>
+
+  <joint name="elevator_frame_right_joint" type="fixed">
+    <origin xyz="${chassis_length/2 -  10.6875*IN_TO_M} ${-elevator_width/2} ${chassis_height/2}"/>
+    <parent link="base_link"/>
+    <child link="elevator_frame_right"/>
+  </joint>
+
+  <joint name="elevator_joint" type="prismatic">
+    <axis xyz="0 0 1"/>
+    <limit lower="0" upper="${elevator_stage_range}" effort="100" velocity="100"/>
+    <origin xyz="0 ${-elevator_width/2} 0"/>
+    <parent link="elevator_frame_left"/>
+    <child link="stage_base"/>
+  </joint>
+
+  <joint name="state_left_joint" type="fixed">
+    <origin xyz="0 ${elevator_width/2} ${1*IN_TO_M}"/>
+    <parent link="stage_base"/>
+    <child link="stage_left"/>
+  </joint>
+
+  <joint name="stage_right_joint" type="fixed">
+    <origin xyz="0 ${-elevator_width/2}  ${1*IN_TO_M}"/>
+    <parent link="stage_base"/>
+    <child link="stage_right"/>
+  </joint>
+
+  <joint name="stage_top_joint" type="fixed">
+    <origin xyz="0 ${-elevator_width/2} ${elevator_stage_height}"/>
+    <parent link="stage_left"/>
+    <child link="stage_top"/>
+  </joint>
+
+  <joint name="carriage_joint" type="prismatic">
+    <axis xyz="0 0 1"/>
+    <limit lower="0" upper="${elevator_carriage_range}" effort="100" velocity="100"/>
+    <origin xyz="0 ${-elevator_carriage_width/2 - 1*IN_TO_M} 0"/>
+    <parent link="stage_left"/>
+    <child link="carriage"/>
+    <!-- <mimic joint="elevator_joint" multiplier="${elevator_carriage_range/elevator_stage_range}"/> -->
+  </joint>
+  <gazebo>
+    <!-- TODO(matt.reynolds): Replace with Gazebo gearbox joint once gearbox joints support prismatic joints -->
+    <!-- Currently, they only support revolute. See https://bitbucket.org/osrf/gazebo/issues/1058 -->
+    <plugin name="carriage_joint_mimic_joint_plugin" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+      <joint>elevator_joint</joint>
+      <mimicJoint>carriage_joint</mimicJoint>
+      <robotNamespace>/</robotNamespace>
+    </plugin>
+  </gazebo>
+
+  <joint name="wrist_joint" type="revolute">
+    <axis xyz="0 -1 0"/>
+    <limit lower="0" upper="${pi/2}" effort="1" velocity="1"/>
+    <origin xyz="${2*IN_TO_M} ${wrist_width/2 - 0.5*IN_TO_M} ${2*IN_TO_M}"/>
+    <parent link="carriage"/>
+    <child link="wrist_left"/>
+  </joint>
+
+  <joint name="wrist_end_joint" type="fixed">
+    <origin xyz="${wrist_length} ${-wrist_width/2 + 0.5*IN_TO_M} 0"/>
+    <parent link="wrist_left"/>
+    <child link="wrist_end"/>
+  </joint>
+
+  <joint name="wrist_right_joint" type="fixed">
+    <origin xyz="${-wrist_length} ${-wrist_width/2 + 0.5*IN_TO_M} 0"/>
+    <parent link="wrist_end"/>
+    <child link="wrist_right"/>
+  </joint>
+
+  <joint name="roller_joint" type="continuous">
+    <axis xyz="0 1 0"/>
+    <origin xyz="0 0 ${-2*IN_TO_M}"/>
+    <parent link="wrist_end"/>
+    <child link="cargo_roller"/>
+  </joint>
+
+  <xacro:drive_wheel name="lff_wheel" xyz="${wheel_spacing * 1.5}  ${track_width/2} ${wheel_height + wheel_drop}" mimic="lfc_wheel"/>
+  <xacro:drive_wheel name="lfc_wheel" xyz="${wheel_spacing * 0.5}  ${track_width/2} ${wheel_height}"/>
+  <xacro:drive_wheel name="lrc_wheel" xyz="${wheel_spacing * -0.5} ${track_width/2}  ${wheel_height}"/>
+  <xacro:drive_wheel name="lrr_wheel" xyz="${wheel_spacing * -1.5} ${track_width/2}  ${wheel_height + wheel_drop}" mimic="lrc_wheel"/>
+
+  <xacro:drive_wheel name="rff_wheel" xyz="${wheel_spacing * 1.5}  ${-track_width/2} ${wheel_height + wheel_drop}" mimic="rfc_wheel"/>
+  <xacro:drive_wheel name="rfc_wheel" xyz="${wheel_spacing * 0.5}  ${-track_width/2} ${wheel_height}"/>
+  <xacro:drive_wheel name="rrc_wheel" xyz="${wheel_spacing * -0.5} ${-track_width/2}  ${wheel_height}"/>
+  <xacro:drive_wheel name="rrr_wheel" xyz="${wheel_spacing * -1.5} ${-track_width/2}  ${wheel_height + wheel_drop}" mimic="rrc_wheel"/>
+
+  <!-- Load the FRC plugins -->
+  <xacro:load_frc_plugin/>
+</robot>

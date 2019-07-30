@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="IN_TO_M" value="0.0254"/>
+  <xacro:property name="LB_TO_KG" value="0.453592"/>
+
+
+  <xacro:property name="chassis_height" value="${5.25*IN_TO_M}"/>
+  <xacro:property name="chassis_width" value="${28*IN_TO_M}"/>
+  <xacro:property name="chassis_length" value="${32*IN_TO_M}"/>
+
+  <xacro:property name="wheel_radius" value="${3*IN_TO_M}"/>
+  <xacro:property name="wheel_thickness" value="${2*IN_TO_M}"/>
+  <xacro:property name="wheel_mass" value="${1.5*LB_TO_KG}"/>
+
+  <xacro:property name="wheel_spacing" value="${7.5*IN_TO_M}"/>
+  <xacro:property name="wheel_height" value="${chassis_height - 6.8767*IN_TO_M}"/>
+  <xacro:property name="wheel_drop" value="${0.5*IN_TO_M}"/>
+  <xacro:property name="track_width" value="${24.562*IN_TO_M}"/>
+
+  <xacro:property name="elevator_width" value="${18*IN_TO_M}"/>
+  <xacro:property name="elevator_frame_height" value="${40.861*IN_TO_M}"/>
+  <xacro:property name="elevator_stage_height" value="${38*IN_TO_M}"/>
+  <xacro:property name="elevator_carriage_width" value="${elevator_width - 2*IN_TO_M}"/>
+  <xacro:property name="elevator_carriage_height" value="${10*IN_TO_M}"/>
+
+  <xacro:property name="wrist_width" value="${13.5*IN_TO_M}"/>
+  <xacro:property name="wrist_length" value="${13*IN_TO_M}"/>
+
+  <xacro:property name="roller_radius" value="${1*IN_TO_M}"/>
+
+  <xacro:property name="elevator_stage_range" value="${36*IN_TO_M}"/>
+  <xacro:property name="elevator_carriage_range" value="${elevator_stage_height - elevator_carriage_height}"/>
+</robot>
