@@ -27,18 +27,15 @@
 # POSSIBILITY OF SUCH DAMAGE.
 ##############################################################################
 
-"""
-Launch the planning network visualizer
-"""
+"""Launch the planning network visualizer."""
 
-from python_qt_binding.QtWidgets import QApplication  # pylint: disable=import-error, no-name-in-module
+from python_qt_binding.QtWidgets import QApplication
 from network_visualizer.window import MainWindow
 
 
 def main():
-    """
-    Main function
-    """
+    """Main function."""
+
     app = QApplication([])
 
     window = MainWindow()
