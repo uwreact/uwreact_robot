@@ -3,6 +3,24 @@
 frc_robot_hw_real:
   joints: &joints
 
+    pdp:
+      type: pdp
+      id: 0
+
+    compressor:
+      type: compressor
+      id: 0
+
+    builtin:
+      type: built_in_accel
+      frame_id: frame_name
+
+    navx:
+      type: navx
+      frame_id: base_link
+      interface: spi
+      id: 4
+
     lfc_wheel_joint:
       type: can_talon_srx
       id: 0
