@@ -11,6 +11,6 @@ catkin_package()
 catkin_python_setup()
 
 # Install scripts
-install(PROGRAMS scripts/open_network_visualizer
+install(PROGRAMS scripts/network_visualizer
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
