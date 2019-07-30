@@ -13,7 +13,7 @@ frc_robot_hw_real:
 
     builtin:
       type: built_in_accel
-      frame_id: frame_name
+      frame_id: base_link
 
     navx:
       type: navx
