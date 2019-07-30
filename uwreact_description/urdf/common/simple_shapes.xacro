@@ -9,13 +9,13 @@
       <mass value="${mass}"/>
       <inertia ixx="${mass * (ly*ly + lz*lz) / 12}"  ixy="0"  ixz="0"
                 iyy="${mass * (lx*lx + lz*lz) / 12}" iyz="0"
-                izz="${mass * (lx*lx + ly*ly) / 12}" />
+                izz="${mass * (lx*lx + ly*ly) / 12}"/>
     </inertial>
 
       <visual>
       <origin xyz="${xyz}" rpy="${rpy}"/>
       <geometry>
-        <box size="${lx} ${ly} ${lz}" />
+        <box size="${lx} ${ly} ${lz}"/>
       </geometry>
       <material name="${color}"/>
     </visual>
@@ -23,7 +23,7 @@
     <collision>
       <origin xyz="${xyz}" rpy="${rpy}"/>
       <geometry>
-        <box size="${lx} ${ly} ${lz}" />
+        <box size="${lx} ${ly} ${lz}"/>
       </geometry>
     </collision>
     </link>
@@ -41,13 +41,13 @@
       <mass value="${mass}"/>
       <inertia ixx="${mass * (3*rad*rad + len*len) / 12}"  ixy="0"  ixz="0"
                 iyy="${mass * (3*rad*rad + len*len) / 12}" iyz="0"
-                izz="${mass * rad*rad / 2}" />
+                izz="${mass * rad*rad / 2}"/>
     </inertial>
 
       <visual>
         <origin xyz="${xyz}" rpy="${rpy}"/>
         <geometry>
-          <cylinder length="${len}" radius="${rad}" />
+          <cylinder length="${len}" radius="${rad}"/>
         </geometry>
       <material name="${color}"/>
       </visual>
@@ -55,7 +55,7 @@
       <collision>
         <origin xyz="${xyz}" rpy="${rpy}"/>
         <geometry>
-          <cylinder length="${len}" radius="${rad}" />
+          <cylinder length="${len}" radius="${rad}"/>
         </geometry>
     </collision>
     </link>
