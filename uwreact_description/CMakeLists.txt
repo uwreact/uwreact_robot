@@ -8,6 +8,6 @@ find_package(catkin REQUIRED)
 catkin_package()
 
 # Install shared files
-install(DIRECTORY config meshes urdf worlds
+install(DIRECTORY config launch meshes urdf worlds
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
