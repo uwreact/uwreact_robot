@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+
+<!-- Main controls launch file -->
+<launch>
+  <arg name="debug"/>
+  <arg name="robot"/>
+  <arg name="sim"/>
+  <arg name="urdf"/>
+  <arg name="world"/>
+
+  <!-- Load URDF, joints, controllers -->
+  <include file="$(find uwreact_bringup)/launch/controls/spawn_robot.launch">
+    <arg name="robot" value="$(arg robot)"/>
+    <arg name="urdf" value="$(arg urdf)"/>
+  </include>
+
+  <!-- Load the real robot base node -->
+  <group unless="$(arg sim)">
+    <node name="base_node" pkg="frc_robot_hw" type="robot_base_node" required="true" output="screen"
+          launch-prefix="$(eval 'gdb --ex run --args' if debug else '')"/>
+  </group>
+
+  <!-- Load the simulation environment -->
+  <group if="$(arg sim)">
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+      <group if="$(arg world)">
+        <arg name="world_name" value="$(find uwreact_description)/worlds/$(arg world).world"/>
+      </group>
+
+      <arg name="debug" value="$(arg debug)"/>
+      <arg name="verbose" value="true"/>
+      <!-- <arg name="required" value="true"/> -->      <!-- Unavailable in Melodic -->
+
+      <!-- Must start paused to set model parameters -->
+      <arg name="paused" value="true"/>
+    </include>
+
+    <!-- Spawn the robot model with correct joint positions -->
+    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="
+      -urdf
+      -model $(arg robot)
+      -param robot_description
+      -J lff_wheel_joint 0.0
+      -J lfc_wheel_joint 0.0
+      -J lrc_wheel_joint 0.0
+      -J lrr_wheel_joint 0.0
+      -J rff_wheel_joint 0.0
+      -J rfc_wheel_joint 0.0
+      -J rrc_wheel_joint 0.0
+      -J rrr_wheel_joint 0.0
+      -J elevator_joint 0.0
+      -J carriage_joint 0.0
+      -J wrist_joint 0.0
+      -z 0.15
+      -unpause"/>
+  </group>
+
+  <!-- Start a robot_state_publisher to maintain the TF tree -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" respawn="true"/>
+</launch>

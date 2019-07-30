@@ -7,7 +7,7 @@ find_package(catkin REQUIRED)
 # Declare a catkin package
 catkin_package()
 
-# Install launch files
-install(DIRECTORY launch
+# Install config and launch files
+install(DIRECTORY config launch
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )

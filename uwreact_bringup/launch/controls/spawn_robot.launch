@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+
+<!-- Load the robot URDF, joints, and controllers -->
+<launch>
+  <arg name="robot"/>
+  <arg name="urdf"/>
+
+  <!-- List joints for the hardware interface -->
+  <rosparam file="$(find uwreact_description)/config/$(arg robot).yaml" command="load"/>
+
+  <!-- Load the URDF to the parameter server -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find uwreact_description)/urdf/$(arg urdf).xacro'"/>
+
+  <!-- Load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="controller_manager" respawn="false" output="screen" args="
+    spawn
+    joint_state_controller
+    imu_sensor_controller
+    pdp_state_controller
+    compressor_state_controller
+    compressor_cmd_controller
+    drive_train_controller
+    elevator_controller
+    wrist_controller
+    roller_controller"/>
+</launch>
