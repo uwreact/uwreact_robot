@@ -1,6 +1,7 @@
 # uwreact_robot
 
 [![Build Status](https://travis-ci.com/uwreact/uwreact_robot.svg?branch=master)](https://travis-ci.com/uwreact/uwreact_robot)
+[![License](https://img.shields.io/github/license/uwreact/uwreact_robot.svg)](LICENSE)
 
 The software behind our fully autonomous FIRST robots
 
