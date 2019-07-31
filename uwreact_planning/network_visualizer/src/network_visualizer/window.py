@@ -25,19 +25,13 @@
 # POSSIBILITY OF SUCH DAMAGE.
 ##############################################################################
 
-"""
-TODO(Ivan-Z): Module docstring
-"""
+"""TODO(Ivan-Z): Module docstring."""
 
-from python_qt_binding.QtWidgets import QMainWindow  # pylint: disable=import-error, no-name-in-module
+from python_qt_binding.QtWidgets import QMainWindow
 
 
 class MainWindow(QMainWindow):
-    """
-    Main window for the visualizer
-    """
-
-    # pylint: disable=too-few-public-methods
+    """Main window for the visualizer."""
 
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)

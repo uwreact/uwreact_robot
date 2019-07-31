@@ -1,6 +1,9 @@
 [MASTER]
 max-line-length = 120
 enable = all
+ignored-modules = python_qt_binding
+min-public-methods = 0
+
 
 # Disabled checks
 disable = len-as-condition, too-many-locals, locally-disabled, suppressed-message

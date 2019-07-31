@@ -188,7 +188,7 @@ def test_pylint():
     files = files.decode('utf-8').strip().split('\n')
     files = [f for f in files if '.ci_config' not in f and f != '']
     if len(files) != 0:
-        ret = subprocess.call(['pylint', '-s', 'n'] + files)
+        ret = subprocess.call(['pylint', '--persistent', 'n', '-s', 'n'] + files)
     else:
         ret = 0
 
